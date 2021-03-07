@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lucky For Life</title>
+
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+</head>
+<body>
+    <img src="lottery.jpg" width="500", style="none">
+
+<h1>Lottery Simulator</h1>
+
+<script language = "javascript">
+
+
+function getWinningPicks()
+{
+  let lotteryNums = [];
+  //randomize and store lottery numbers
+
+  for(let i = 0; i < 5; i++)
+  {
+    let num = Math.floor(Math.random() * (47)) + 1;
+    lotteryNums.push(num);
+  }
+  // sorting numbers in the array
+  return lotteryNums.sort(function(a, b){return a-b});  
+}
+picksOfTheDay = getWinningPicks();
+luckyBallOfTheDay = Math.floor(Math.random() * (17)) + 1
+
+// Displaying the picks of the day
+document.write("----PICKS OF THE DAY----");
+document.write("<br>");
+for (i = 0; i < 5; i++)
+{
+  document.write(picksOfTheDay[i]);
+  document.write("        ");
+}
+document.write("<br>");
+document.write("----LUCKY BALL OF THE DAY----");
+document.write("<br>");
+document.write(luckyBallOfTheDay);
+
+document.write("<br>")
+//Getting user inputs
+function getUserPicks()
+{
+    let userInput = [];
+    input = prompt("Please enter the 5 numbers:");
+    userLuckyBall = prompt("Please enter your lucky ball number:");
+    userLuckyBall = parseInt(userLuckyBall);
+
+    nums = input.split(" ");
+    for(i = 0; i < 5; i++)
+    {
+        userInput.push(parseInt(nums[i]));
+    }
+    return userInput;
+}
+document.write("<br>")
+userPicks = getUserPicks();
+// display user picks and lucky ball
+document.write(" You have chosen: <br>")
+for(i = 0; i < 5; i++)
+{
+   document.write(userPicks[i] + " "); 
+}
+document.write("<br>")
+document.write("Your pick for the lucky ball: <br>")
+document.write(userLuckyBall);
+
+// count matches
+
+function countMatches(arr1, arr2)
+{
+    count = 0;
+    for(i = 0; i < 5; i++)
+    {
+        for (j = 0; j < 5; j++)
+        {
+            if (arr2[j] == arr1[i])
+            {
+                count++;
+                break;
+            }
+        }
+    }
+    return count;
+}
+
+// check the lucky ball
+
+function luckyMatch(num1, num2)
+{
+    if (num1 == num2)
+    {
+        return true;
+    }
+    return false;
+}
+
+
+matchingPicks = countMatches(picksOfTheDay, userPicks);
+document.write("<br>");
+// displaying number of matches
+if (matchingPicks > 0)
+{
+    document.write("Congrats! You have matched " + matchingPicks + " ball(s) <br>")
+
+}
+else
+{
+    document.write("Sorry. You haven't matched any of the numbers <br>")
+}
+
+// checking the lucky ball
+if(luckyMatch(luckyBallOfTheDay,userLuckyBall))
+{
+    document.write("Congrats! You have matched the Lucky Ball Of The Day <br>");
+}
+else
+{
+    document.write("Sorry. You didn't match the Lucky Ball Of The Day <br>")
+}
+
+
+// Calculating the payout
+
+switch (matchingPicks) 
+{
+  case 5:
+    if(luckyMatch(luckyBallOfTheDay,userLuckyBall))
+    {
+        document.write("Your prize is $7000 a WEEK for LIFE <br>")
+    }
+    else
+    {
+        document.write("Your prize is $25000 a YEAR for LIFE<br>")
+    }
+    
+    break;
+  case 4:
+        if(luckyMatch(luckyBallOfTheDay,userLuckyBall))
+    {
+        document.write("Your prize is $5000 <br>")
+    }
+    else
+    {
+        document.write("Your prize is $200 <br>")
+    }
+    break;
+  case 3:
+        if(luckyMatch(luckyBallOfTheDay,userLuckyBall))
+    {
+        document.write("Your prize is $150 <br>")
+    }
+    else
+    {
+        document.write("Your prize is $20 <br>")
+    }
+    break;
+  case 2:
+        if(luckyMatch(luckyBallOfTheDay,userLuckyBall))
+    {
+        document.write("Your prize is $25 <br>")
+    }
+    else
+    {
+        document.write("Your prize is $3 <br>")
+    }
+    break;
+  case 1:
+        if(luckyMatch(luckyBallOfTheDay,userLuckyBall))
+    {
+        document.write("Your prize is $6 <br>")
+    }
+
+    break;
+  case 0:
+        if(luckyMatch(luckyBallOfTheDay,userLuckyBall))
+    {
+        document.write("Your prize is $4 <br>")
+    }
+    break;
+  default:
+    document.write("Sorry. You didn't win any prize <br>");
+}
+document.write("<br>");
+document.write("Thank you for playing!")
+</script>
+
+
+</body>
+</html>
